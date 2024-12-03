@@ -1,0 +1,51 @@
+﻿@model List<Group>
+
+<h2>Manage Groups</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<form asp-action="CreateGroup" method="post">
+    <div class="form-group">
+        <label for="groupName">Add a New Group</label>
+        <input type="text" id="groupName" name="groupName" placeholder="Enter group name" class="form-control" required />
+        <button type="submit" class="btn btn-primary mt-2">Add Group</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Your Groups</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Group Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("ViewGroup", "Groups", new { groupName = group.Name })">@group.Name</a>
+                    </td>
+                    <td>
+                        <form asp-action="DeleteGroup" method="post" style="display:inline;">
+                            <input type="hidden" name="groupName" value="@group.Name" />
+                            <button type="submit" class="btn btn-danger">Delete Group</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No groups found. Create your first group above!</p>
+}

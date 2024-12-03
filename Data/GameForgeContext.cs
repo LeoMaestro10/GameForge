@@ -46,7 +46,7 @@ namespace GameForge.Data
         public DbSet<Review> Review { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<Developer> Developers { get; set; }
-        
-
+        public object GiftCards { get; internal set; }
+        public object Wallets { get; internal set; }
     }
 }

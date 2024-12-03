@@ -1,0 +1,9 @@
+﻿<h2>Subscription Plans</h2>
+@foreach (var plan in Model)
+{
+    <div>
+        <h3>@plan.Name</h3>
+        <p>Price: @plan.Price</p>
+        <a asp-action="Checkout" asp-route-id="@plan.Id">Subscribe</a>
+    </div>
+}

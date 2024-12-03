@@ -49,7 +49,7 @@ namespace GameForge.Models
             }
         }
 
-        [Required]  // Ensures that every game is linked to a developer
+        [Required]
         public int DeveloperId { get; set; }
 
         // Navigation property to Developer
@@ -63,9 +63,7 @@ namespace GameForge.Models
         // Calculated Price After Discount
         public decimal PriceAfterDiscount => IsPaid ? Price * (1 - DiscountPercentage / 100) : 0;
 
-        // Define a discount percentage (e.g., 0 if no discount)
-        
-
-
+        // New Property: Version History
+        public ICollection<GameVersion> Versions { get; set; } = new List<GameVersion>();
     }
 }

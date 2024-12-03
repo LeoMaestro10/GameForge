@@ -1,0 +1,19 @@
+﻿<h2>Top Up Wallet</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="giftCardCode">Gift Card Code</label>
+        <input type="text" id="giftCardCode" name="giftCardCode" class="form-control" placeholder="Enter gift card code" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Top Up</button>
+</form>

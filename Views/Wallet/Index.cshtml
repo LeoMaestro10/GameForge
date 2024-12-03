@@ -1,0 +1,14 @@
+﻿@model Wallet
+
+<h2>Your Wallet</h2>
+
+@if (Model != null)
+{
+    <p>Current Balance: $@Model.Balance</p>
+}
+else
+{
+    <p>No wallet found.</p>
+}
+
+<a href="@Url.Action("TopUp")">Top Up Wallet</a>

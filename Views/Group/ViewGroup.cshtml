@@ -1,0 +1,48 @@
+﻿@model Group
+
+<h2>@Model.Name</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<h3>Games in this Group</h3>
+@if (Model.Games != null && Model.Games.Any())
+{
+    <ul class="list-group">
+        @foreach (var game in Model.Games)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                @game.Title
+                <form asp-action="RemoveGameFromGroup" method="post" style="display:inline;">
+                    <input type="hidden" name="groupName" value="@Model.Name" />
+                    <input type="hidden" name="gameId" value="@game.Id" />
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No games in this group. Add some below!</p>
+}
+
+<h3>Add a Game</h3>
+<form asp-action="AddGameToGroup" method="post" class="form-inline">
+    <input type="hidden" name="groupName" value="@Model.Name" />
+    <div class="form-group">
+        <select name="gameId" class="form-control" required>
+            @foreach (var game in ViewBag.AvailableGames as List<Game>)
+            {
+                <option value="@game.Id">@game.Title</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary ml-2">Add Game</button>
+</form>
+
+<a class="btn btn-secondary mt-3" href="@Url.Action("ManageGroups", "Groups")">Back to Manage Groups</a>

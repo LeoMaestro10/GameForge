@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GameForge.Models.GameVersion>
+@{
+    ViewData["Title"] = "Version History";
+}
+
+<h2>Version History for @ViewBag.GameTitle</h2>
+
+@if (!Model.Any())
+{
+    <p>No versions available for this game.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Version Number</th>
+                <th>Release Date</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var version in Model)
+            {
+                <tr>
+                    <td>@version.VersionNumber</td>
+                    <td>@version.ReleaseDate.ToShortDateString()</td>
+                    <td>@version.Description</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@version.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@version.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

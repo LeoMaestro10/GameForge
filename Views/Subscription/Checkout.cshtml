@@ -1,0 +1,26 @@
+﻿<h2>Checkout</h2>
+<p>Plan: @Model.Name</p>
+<p>Price: @Model.Price</p>
+
+<form asp-action="ProcessPayment">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <label for="paymentMethod">Select Payment Method:</label>
+    <select name="paymentMethod" id="paymentMethod">
+        <option value="Wallet">Wallet</option>
+        <option value="Coupon">Coupon</option>
+    </select>
+
+    <div>
+        <label for="couponCode">Coupon Code (optional):</label>
+        <input type="text" name="couponCode" id="couponCode" />
+    </div>
+
+    <button type="submit">Pay Now</button>
+</form>
+
+
+@* @* <h2>@ViewData["Message"]</h2>
+@if (ViewData["FreeGames"] != null)
+{
+    <p>You have received free games: @ViewData["FreeGames"]</p> 
+}  DISPLAY MESSAGE AFTER GETTING SUBSCRIPTION  *@ 
